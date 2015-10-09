@@ -12,48 +12,23 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
-#include <array>
 #include <thread>
 #include <set>
-#include <vector>
+#include <array>
 
-#include "SINT64.h"
-#include "Cell.h"
+#define WIDTH 200
+#define HEIGHT 50
 
-/*#ifdef _WIN32
-#include <windows.h>
-
-void sleep(unsigned milliseconds)
-{
-	Sleep(milliseconds);
-}
-#else
-#include <unistd.h>
-
-void sleep(unsigned milliseconds)
-{
-	usleep(milliseconds * 1000); // takes microseconds
-}
-#endif*/
-
-//#define HEIGHT 50
-//#define WIDTH 50
-
-#define MIN 0//std::numeric_limits<int8_t>::min()
-#define MAX 10//std::numeric_limits<int8_t>::max()
+#define MIN std::numeric_limits<int64_t>::min()
+#define MAX std::numeric_limits<int64_t>::max()
 
 class Board {
 public:
 	
-	Board() : totalAlive_(0) { }
+	Board() { }
 	~Board() { }
 	
-	
-	void CellIsAlive(int64_t x, int64_t y) {
-		//cells_[y + HEIGHT/2][x + WIDTH/2].statusIs("alive");
-		aliveCells_.insert({x,y});
-		totalAlive_++;
-	}
+	void initializeBoard(std::istream& input);
 	
 	void UpdateBoard();
 	
@@ -66,13 +41,14 @@ public:
 private:
 	
 	void CheckDeadCellsNeighbors(int64_t deadCellX, int64_t deadCellY);
-	
-	//std::array<std::array<Cell, WIDTH>, HEIGHT> cells_;
-	//std::array<std::array<Cell, WIDTH>, HEIGHT> previousCells_;
+	void CellIsAlive(int64_t x, int64_t y);
+
+	// These sets are the bulk of the optimization.
+	// We only need to store the cells that are alive and the dead neighbors
+	// of the live cells during each update.
 	std::set<std::pair<int64_t, int64_t>> aliveCells_;
 	std::set<std::pair<int64_t, int64_t>> previousAliveCells_;
 	std::set<std::pair<int64_t, int64_t>> checkedDeadCells_;
-	uint64_t totalAlive_;
 };
 
 #endif /* defined(__GameOfLife__Board__) */

@@ -1,0 +1,21 @@
+This is a console application. Only cells from (0,0) to (200,50) are printed to the console. The executable is in ./Build/Products/Release.
+
+Usage:
+
+./GameOfLife /path/to/input.txt
+
+
+./GameOfLife
+Please provide a list of inputs (x,y), one live cell per line, then press crtl-d
+(0, 1)
+(1, 2)
+(2, 0)
+(2, 1)
+(2, 2)
+(-2000000000000, -2000000000000)
+(-2000000000001, -2000000000001)
+
+./GameOfLife
+Please provide a list of inputs (x,y), one live cell per line, then press crtl-d
+
+(last usage generates random board)

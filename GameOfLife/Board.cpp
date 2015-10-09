@@ -8,12 +8,53 @@
 
 #include "Board.h"
 
+void Board::initializeBoard(std::istream& input) {
+	
+	char line[64];
+	while(input) {
+		input.getline(line, 64);
+		std::string coordinates(line);
+		
+		auto pos1 = coordinates.find("(");
+		auto pos2 = coordinates.find(",");
+		auto pos3 = coordinates.find(")");
+		
+		if (pos1 == std::string::npos || pos2 == std::string::npos || pos3 == std::string::npos) continue;
+		
+		auto x_coord = coordinates.substr(pos1+1, pos2-1);
+		auto y_coord = coordinates.substr(pos2+1, pos3-1);
+		
+		// Not sure why but strtoll does not return a signed 64 bit int,
+		// so I get the unsigned 64 bit int can cast it to signed.
+		// This assumes long long is represented by 64 bits on the machine
+		unsigned long long x_ull = std::strtoull(x_coord.c_str(), 0, 10);
+		unsigned long long y_ull = std::strtoull(y_coord.c_str(), 0, 10);
+		
+		int64_t x = x_ull;
+		int64_t y = y_ull;
+		
+		CellIsAlive(x, y);
+	}
+	
+	// if no input, random generation of live cells
+	if (aliveCells_.size() == 0) {
+		for ( int64_t y = 0; y < HEIGHT; y++) {
+			for (int64_t x = 0; x < WIDTH; x++) {
+				int num = rand() % 10;
+				if (num > 5) {
+		 			CellIsAlive(x, y);
+				}
+		 	}
+		}
+	}
+}
 
 
 void Board::UpdateBoard() {
 	
 	previousAliveCells_ = aliveCells_;
 	checkedDeadCells_.clear();
+	
 	for (auto cell: previousAliveCells_) {
 		uint8_t numNeighborsAlive = 0;
 		
@@ -33,7 +74,6 @@ void Board::UpdateBoard() {
 				} else {
 					numNeighborsAlive++;
 				}
-				//numNeighborsAlive += (previousAliveCells_.find({x, y}) == previousAliveCells_.end()) ? 0 : 1;
 			}
 		}
 		
@@ -42,65 +82,37 @@ void Board::UpdateBoard() {
 		}
 	}
 	
-	if( aliveCells_.size() == 0){
-		PrintBoard();
+	if (aliveCells_.size() == 0) {
 		std::cout << "Colony died :(" << std::endl;
 		exit(0);
 	}
-	
-	/*previousCells_ = cells_;
-	for (int64_t y = 0; y < HEIGHT; y++) {
-		for (int64_t x = 0; x < WIDTH; x++) {
-			uint8_t numNeighborsAlive = 0;
-			
-			int64_t start_x = (x == 0 ? x : x-1);
-			int64_t end_x = (x == WIDTH-1 ? x : x+1);
-			int64_t start_y = (y == 0 ? y : y-1);
-			int64_t end_y = (y == HEIGHT-1 ? y : y+1);
-			
-			for (int64_t i = start_y; i <= end_y; i++){
-				for (int64_t j = start_x; j <= end_x; j++) {
-					if (i == y && j == x) {
-						continue;
-					}
-					numNeighborsAlive += previousCells_[i][j].status();
-				}
-			}
-			
-			if (previousCells_[y][x].status() && (numNeighborsAlive < 2 || numNeighborsAlive > 3) ) {
-				cells_[y][x].statusIs("dead");
-				totalAlive_--;
-			} else if (!previousCells_[y][x].status() && numNeighborsAlive == 3) {
-				cells_[y][x].statusIs("alive");
-				totalAlive_++;
-			}
-		}
-	}
-	
-	if (totalAlive_ == 0) {
-		PrintBoard();
-		std::cout << "Colony died :(" << std::endl;
-		exit(0);
-	}*/
 }
 
+
 void Board::PrintBoard() {
-	for (int64_t y = MIN; y < MAX; y++) {
-		for (int64_t x = MIN; x < MAX; x++) {
+	
+	for (int64_t y = 0; y < HEIGHT; y++) {
+		for (int64_t x = 0; x < WIDTH; x++) {
 			if (aliveCells_.find({x, y}) != aliveCells_.end()) {
-				std::cout << "•";
-				//std::wcout << L"■";
+				std::cout << "\u25A0";
 			} else {
-				std::cout << "-";
-				//std::wcout << L"□";
+				std::cout << " ";
 			}
 		}
 		std::cout << std::endl;
 	}
-	std::cout << std::endl << std::endl << std::endl;
+	std::cout << std::endl << std::endl;
 }
 
+
+void Board::CellIsAlive(int64_t x, int64_t y) {
+	
+	aliveCells_.insert({x,y});
+}
+
+
 void Board::CheckDeadCellsNeighbors(int64_t deadCellX, int64_t deadCellY) {
+	
 	if (checkedDeadCells_.find({deadCellX, deadCellY}) != checkedDeadCells_.end()) {
 		return;
 	}

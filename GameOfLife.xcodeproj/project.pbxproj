@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3E2917DF1BC1E88900178085 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E2917DE1BC1E88900178085 /* main.cpp */; };
 		3E2917E71BC1EA4F00178085 /* Board.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E2917E51BC1EA4F00178085 /* Board.cpp */; };
-		3E2917EA1BC1EA7800178085 /* Cell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E2917E81BC1EA7800178085 /* Cell.cpp */; };
 		3E2917ED1BC1EAC400178085 /* SINT64.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E2917EB1BC1EAC400178085 /* SINT64.cpp */; };
 /* End PBXBuildFile section */
 
@@ -30,8 +29,6 @@
 		3E2917DE1BC1E88900178085 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		3E2917E51BC1EA4F00178085 /* Board.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Board.cpp; sourceTree = "<group>"; };
 		3E2917E61BC1EA4F00178085 /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Board.h; sourceTree = "<group>"; };
-		3E2917E81BC1EA7800178085 /* Cell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cell.cpp; sourceTree = "<group>"; };
-		3E2917E91BC1EA7800178085 /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
 		3E2917EB1BC1EAC400178085 /* SINT64.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SINT64.cpp; sourceTree = "<group>"; };
 		3E2917EC1BC1EAC400178085 /* SINT64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SINT64.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -67,8 +64,6 @@
 			isa = PBXGroup;
 			children = (
 				3E2917DE1BC1E88900178085 /* main.cpp */,
-				3E2917E81BC1EA7800178085 /* Cell.cpp */,
-				3E2917E91BC1EA7800178085 /* Cell.h */,
 				3E2917EB1BC1EAC400178085 /* SINT64.cpp */,
 				3E2917EC1BC1EAC400178085 /* SINT64.h */,
 				3E2917E51BC1EA4F00178085 /* Board.cpp */,
@@ -133,7 +128,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E2917EA1BC1EA7800178085 /* Cell.cpp in Sources */,
 				3E2917E71BC1EA4F00178085 /* Board.cpp in Sources */,
 				3E2917DF1BC1E88900178085 /* main.cpp in Sources */,
 				3E2917ED1BC1EAC400178085 /* SINT64.cpp in Sources */,
