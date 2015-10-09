@@ -39,9 +39,8 @@ void sleep(unsigned milliseconds)
 //#define HEIGHT 50
 //#define WIDTH 50
 
-#define MIN 0 //if (draw_board) 0 else std::numeric_limits<int64_t>::min()
-#define MAX 50 //if (draw_board) 50 else std::numeric_limits<int64_t>::max()
-//bool draw_board = true;
+#define MIN 0//std::numeric_limits<int8_t>::min()
+#define MAX 10//std::numeric_limits<int8_t>::max()
 
 class Board {
 public:
@@ -60,8 +59,8 @@ public:
 	
 	void PrintBoard();
 	
-	void Tick() {
-		std::this_thread::sleep_for(std::chrono::milliseconds(50));
+	void Tick(std::chrono::milliseconds ms) {
+		std::this_thread::sleep_for(ms);
 	}
 	
 private:

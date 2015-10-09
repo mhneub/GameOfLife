@@ -180,6 +180,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				SYMROOT = /Users/mh_neub/Documents/github/GameOfLife;
 			};
 			name = Debug;
 		};
@@ -214,12 +215,14 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SYMROOT = /Users/mh_neub/Documents/github/GameOfLife;
 			};
 			name = Release;
 		};
 		3E2917E31BC1E88900178085 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				INSTALL_PATH = /Users/mh_neub/Documents/github/GameOfLife;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -227,6 +230,7 @@
 		3E2917E41BC1E88900178085 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				INSTALL_PATH = /Users/mh_neub/Documents/github/GameOfLife;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -250,6 +254,7 @@
 				3E2917E41BC1E88900178085 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
