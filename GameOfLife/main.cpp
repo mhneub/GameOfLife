@@ -43,7 +43,7 @@ int main(int argc, const char * argv[]) {
 		board->Tick(std::chrono::milliseconds(50));
 		board->UpdateBoard();
 	}*/
-	
+
 	while (true) {
 		board->PrintBoard();
 		board->Tick(std::chrono::milliseconds(50));

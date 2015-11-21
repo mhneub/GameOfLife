@@ -34,9 +34,13 @@ void Board::initializeBoard(std::istream& input) {
 		int64_t y = y_ull;
 		
 		CellIsAlive(x, y);
+		
+		std::cout << x << " " << y << std::endl;
+		
 	}
 	
 	// if no input, random generation of live cells
+	srand(time(NULL));
 	if (aliveCells_.size() == 0) {
 		for ( int64_t y = 0; y < HEIGHT; y++) {
 			for (int64_t x = 0; x < WIDTH; x++) {
