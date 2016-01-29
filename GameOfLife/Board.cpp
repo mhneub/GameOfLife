@@ -24,8 +24,8 @@ void Board::initializeBoard(std::istream& input) {
 		auto x_coord = coordinates.substr(pos1+1, pos2-1);
 		auto y_coord = coordinates.substr(pos2+1, pos3-1);
 		
-		// Not sure why but strtoll does not return a signed 64 bit int,
-		// so I get the unsigned 64 bit int can cast it to signed.
+		// Not sure why, but strtoll does not return a signed 64 bit int.
+		// So I get the unsigned 64 bit int can cast it to signed.
 		// This assumes long long is represented by 64 bits on the machine
 		unsigned long long x_ull = std::strtoull(x_coord.c_str(), 0, 10);
 		unsigned long long y_ull = std::strtoull(y_coord.c_str(), 0, 10);
@@ -34,9 +34,6 @@ void Board::initializeBoard(std::istream& input) {
 		int64_t y = y_ull;
 		
 		CellIsAlive(x, y);
-		
-		std::cout << x << " " << y << std::endl;
-		
 	}
 	
 	// if no input, random generation of live cells
@@ -67,6 +64,7 @@ void Board::UpdateBoard() {
 		int64_t start_y = (cell.second == MIN ? cell.second : cell.second-1);
 		int64_t end_y = (cell.second == MAX-1 ? cell.second : cell.second+1);
 		
+		// iterate through neighbors of alive cell
 		for (int64_t x = start_x; x <= end_x; x++){
 			for (int64_t y = start_y; y <= end_y; y++) {
 				if (x == cell.first && y == cell.second) {
@@ -128,6 +126,7 @@ void Board::CheckDeadCellsNeighbors(int64_t deadCellX, int64_t deadCellY) {
 	int64_t start_y = (deadCellY == MIN ? deadCellY : deadCellY-1);
 	int64_t end_y = (deadCellY == MAX-1 ? deadCellY : deadCellY+1);
 	
+	// iterate through neighbors of dead cell
 	for (int64_t x = start_x; x <= end_x; x++){
 		for (int64_t y = start_y; y <= end_y; y++) {
 			if (x == deadCellX && y == deadCellY) {
@@ -143,5 +142,6 @@ void Board::CheckDeadCellsNeighbors(int64_t deadCellX, int64_t deadCellY) {
 	if (numNeighborsAlive == 3) {
 		aliveCells_.insert({deadCellX, deadCellY});
 	}
+	
 	checkedDeadCells_.insert({deadCellX, deadCellY});
 }

@@ -16,9 +16,11 @@
 #include <set>
 #include <array>
 
+// display size of the board
 #define WIDTH 200
 #define HEIGHT 50
 
+// the size of the complete board is the numeric limits of signed 64 bit ints
 #define MIN std::numeric_limits<int64_t>::min()
 #define MAX std::numeric_limits<int64_t>::max()
 
@@ -46,6 +48,7 @@ private:
 	// These sets are the bulk of the optimization.
 	// We only need to store the cells that are alive and the dead neighbors
 	// of the live cells during each update.
+	// The pair of ints represent the cell coordinates on the board.
 	std::set<std::pair<int64_t, int64_t>> aliveCells_;
 	std::set<std::pair<int64_t, int64_t>> previousAliveCells_;
 	std::set<std::pair<int64_t, int64_t>> checkedDeadCells_;
